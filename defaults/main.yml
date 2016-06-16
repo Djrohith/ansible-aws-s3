@@ -1,0 +1,9 @@
+---
+
+aws_s3_region: "us-east-1"
+aws_s3_access_key: ""
+aws_s3_secret_key: ""
+aws_s3_bucket: ""
+aws_s3_mode: get
+
+aws_s3_get_files: []
