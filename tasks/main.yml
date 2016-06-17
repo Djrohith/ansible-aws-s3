@@ -5,8 +5,16 @@
     - python
     - python-pip
 
-- name: Installing BOTO.
-  pip: name=boto
+- name: Installing AWS requirements
+  pip: name={{ item }}
+  with_items:
+    - boto
+    - awscli
+
+- name: Downloading Files
+  shell: AWS_ACCESS_KEY_ID={{ aws_s3_access_key }} AWS_SECRET_ACCESS_KEY={{ aws_s3_secret_key }} aws s3 sync s3://{{ aws_s3_bucket }} /tmp
+  with_items: "{{ aws_s3_get_files }}"
+  when: aws_s3_download_mode == "aws-cli"
 
 - name: Downloading S3 files
   s3: region="{{ aws_s3_region }}"
@@ -17,3 +25,4 @@
       dest="{{ item.dest }}"
       mode="{{ aws_s3_mode }}"
   with_items: "{{ aws_s3_get_files }}"
+  when: aws_s3_download_mode == "ansible-s3"
