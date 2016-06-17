@@ -8,9 +8,6 @@
 - name: Installing BOTO.
   pip: name=boto
 
-- name: Debug variables
-  debug: msg="Lero lero {{aws_s3_secret_key}}"
-
 - name: Downloading S3 files
   s3: region="{{ aws_s3_region }}"
       aws_access_key="{{ aws_s3_access_key }}"
