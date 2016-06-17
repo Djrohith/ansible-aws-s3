@@ -10,6 +10,10 @@ Put this role in your "roles" folder
 
 This role has to be configured by the next variables:
 
+Alternate between 2 types of download: (ansible-s3 to use s3 command or aws-cli to use aws shell sync command)
+
+aws_s3_download_mode: "ansible-s3"
+
 Define the aws s3 region:
 
 aws_s3_region: "us-east-1"
