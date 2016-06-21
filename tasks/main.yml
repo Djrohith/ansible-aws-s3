@@ -11,12 +11,11 @@
     - boto
     - awscli
 
-- name: Downloading Files
-  shell: AWS_ACCESS_KEY_ID={{ aws_s3_access_key }} AWS_SECRET_ACCESS_KEY={{ aws_s3_secret_key }} aws s3 cp s3://{{ aws_s3_bucket }}{{ item.object }} {{ item.dest }}
-  with_items: "{{ aws_s3_get_files }}"
+- name: Downloading Files with aws-cli sync
+  shell: AWS_ACCESS_KEY_ID={{ aws_s3_access_key }} AWS_SECRET_ACCESS_KEY={{ aws_s3_secret_key }} aws s3 sync s3://{{ aws_s3_bucket }}{{ aws_s3_sync_origin }} {{ aws_s3_sync_dest }}
   when: aws_s3_download_mode == "aws-cli"
 
-- name: Downloading S3 files
+- name: Downloading Files with ansible s3
   s3: region="{{ aws_s3_region }}"
       aws_access_key="{{ aws_s3_access_key }}"
       aws_secret_key="{{ aws_s3_secret_key }}"
@@ -24,5 +23,6 @@
       object="{{ item.object }}"
       dest="{{ item.dest }}"
       mode="{{ aws_s3_mode }}"
+      #overwrite=different
   with_items: "{{ aws_s3_get_files }}"
   when: aws_s3_download_mode == "ansible-s3"

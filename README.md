@@ -27,7 +27,7 @@ Define the name of your bucket:
 
 - aws_s3_bucket: ""
 
-Define the files to be downloaded with this structure:
+Define the files to be downloaded with this structure (Only for s3 ansible command):
 
 - aws_s3_get_files:
   - { object: ROUTE_S3_FILE , dest: DEST_LOCAL_SERVER }
@@ -37,6 +37,11 @@ For example:
 - aws_s3_get_files:
   - { object: /daily/package.gz , dest: /tmp/test.gz }
   - { object: /daily/package2.tgz , dest: /tmp/test.tgz }
+
+Define sync origin and sync destination directories:
+
+- aws_s3_sync_origin = "/"
+- aws_s3_sync_dest = "/tmp"
 
 ## Contributing
 
