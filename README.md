@@ -43,6 +43,10 @@ Define sync origin and sync destination directories:
 - aws_s3_sync_origin = "/"
 - aws_s3_sync_dest = "/tmp"
 
+Define if you want to export bucket:
+
+- bucket_export: true
+
 ## Contributing
 
 1. Fork it!
