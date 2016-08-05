@@ -1,0 +1,26 @@
+---
+
+- name: Checking bucket.tar.gz location
+  stat: path={{ bucket_targz_location }}
+  register: bucket_targz
+
+- name: Creating bucket-data folder location
+  file: path={{ bucket_folder_location }} state=directory mode=0755
+
+- shell: ls -1 {{ bucket_folder_location }}
+  register: contents
+
+- file: path={{ bucket_folder_location }}/{{ item }} state=absent
+  with_items: "{{ contents.stdout_lines }}"
+
+- name: Exporting bucket.tar.gz
+  shell: tar -xvf "{{ bucket_targz_location }}" -C "{{ bucket_folder_location }}"
+  when: bucket_targz.stat.exists == True
+
+- name: Checking bucket-data folder location
+  stat: path={{ bucket_folder_location }}
+  register: bucket_folder
+
+- name: Moving public content from bucket to project
+  shell: cp -rf {{ bucket_folder_location }}/* /var/www/default/
+  when: bucket_folder.stat.exists == True
