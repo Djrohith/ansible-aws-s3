@@ -10,3 +10,9 @@ aws_s3_extract_downloaded_files: false
 aws_s3_sync_origin: "/"
 aws_s3_sync_dest: "/tmp"
 aws_s3_get_files: []
+
+bucket_export: true
+bucket_folder: false
+bucket_targz: false
+bucket_folder_location: "/tmp/bucket-data"
+bucket_targz_location: "/tmp/bucket.tar.gz"
