@@ -3,6 +3,7 @@
 - name: Downloading Files with aws-cli sync
   shell: AWS_ACCESS_KEY_ID={{ aws_s3_access_key }} AWS_SECRET_ACCESS_KEY={{ aws_s3_secret_key }} aws s3 sync s3://{{ aws_s3_bucket }}{{ aws_s3_sync_origin }} {{ aws_s3_sync_dest }}
   when: aws_s3_download_mode == "aws-cli"
+  register: aws_s3_data_downloaded
 
 - name: Downloading Files with ansible s3
   s3: region="{{ aws_s3_region }}"
@@ -15,3 +16,4 @@
       #overwrite=different
   with_items: "{{ aws_s3_get_files }}"
   when: aws_s3_download_mode == "ansible-s3"
+  register: aws_s3_data_downloaded
