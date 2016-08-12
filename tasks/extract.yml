@@ -22,5 +22,5 @@
   register: bucket_folder
 
 - name: Moving public content from bucket to project
-  shell: cp -rf {{ bucket_folder_location }}/* /var/www/default/
+  shell: find {{ bucket_folder_location }}/ -maxdepth 1 -not -name "*.sql.gz" -exec cp -rfv {} /var/www/default/ \;
   when: bucket_folder.stat.exists == True
