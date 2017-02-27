@@ -21,6 +21,16 @@
   stat: path={{ bucket_folder_location }}
   register: bucket_folder
 
+- name: Removing bucket.tar.gz
+  file:
+    state: absent
+    path: "{{ bucket_targz_location }}"
+  when: bucket_targz.stat.exists == True
+
 - name: Moving public content from bucket to project
-  shell: find {{ bucket_folder_location }}/ -maxdepth 1 -not -name "*.sql.gz" -exec cp -rfa {} /var/www/default/ \;
+  shell: find {{ bucket_folder_location }} -maxdepth 1 -not -name "*.sql.gz" -not -path {{ bucket_folder_location }} -exec cp -rfa {} /var/www/default/ \;
+  when: bucket_folder.stat.exists == True
+
+- name: Removing migrated content
+  shell: find {{ bucket_folder_location }} -maxdepth 1 -not -name "*.sql.gz" -not -path {{ bucket_folder_location }} -exec rm -r {} \;
   when: bucket_folder.stat.exists == True
