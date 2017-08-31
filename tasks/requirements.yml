@@ -5,6 +5,7 @@
   with_items:
     - python
     - python-pip
+    - python-setuptools
 
 - name: Installing AWS requirements
   pip: name={{ item }}
