@@ -1,0 +1,18 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: joel
+  description: Aws s3 sync/download for Linux.
+  company: "Anakena Internet Services"
+  license: "license (MIT)"
+  min_ansible_version: 2.2
+  platforms:
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - aws
+    - s3
+
+allow_duplicates: yes
