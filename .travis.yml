@@ -1,0 +1,9 @@
+---
+services: docker
+
+env:
+  - distro: debian8
+  - distro: debian9
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
