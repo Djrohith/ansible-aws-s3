@@ -12,6 +12,7 @@ aws_s3_sync_dest: "/tmp"
 aws_s3_get_files: []
 
 bucket_export: true
+bucket_export_root: "/var/www/default"
 bucket_folder: false
 bucket_targz: false
 bucket_folder_location: "/tmp/bucket-data"
