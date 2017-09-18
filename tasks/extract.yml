@@ -28,7 +28,7 @@
   when: bucket_targz.stat.exists == True
 
 - name: Moving public content from bucket to project
-  shell: find {{ bucket_folder_location }} -maxdepth 1 -not -name "*.sql.gz" -not -path {{ bucket_folder_location }} -exec cp -rfa {} /var/www/default/ \;
+  shell: find {{ bucket_folder_location }} -maxdepth 1 -not -name "*.sql.gz" -not -path {{ bucket_folder_location }} -exec cp -rfa {} {{ bucket_export_root }} \;
   when: bucket_folder.stat.exists == True
 
 - name: Removing migrated content
