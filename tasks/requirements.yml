@@ -10,5 +10,6 @@
 - name: Installing AWS requirements
   pip: name={{ item }}
   with_items:
-    - boto
+    - boto3
+    - botocore
     - awscli
